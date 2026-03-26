@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: transparent; /* Allow native background to show */
+        }
+        #chart {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="echarts/echarts.min.js"></script>
+</head>
+<body>
+    <div id="chart"></div>
+    <script>
+        var chart = echarts.init(document.getElementById('chart'));
+        
+        // Handle window resize
+        window.onresize = function() {
+            chart.resize();
+        };
+
+        // Main function to update chart
+        function setOption(optionJson) {
+            try {
+                var option = JSON.parse(optionJson);
+                chart.setOption(option, true); // true = not merge, replace
+            } catch (e) {
+                console.error("Error parsing option JSON: " + e.message);
+            }
+        }
+
+        // Click event handler
+        chart.on('click', function (params) {
+            if (window.Android) {
+                window.Android.onChartClick(JSON.stringify({
+                    componentType: params.componentType,
+                    seriesType: params.seriesType,
+                    seriesName: params.seriesName,
+                    name: params.name,
+                    value: params.value,
+                    dataIndex: params.dataIndex
+                }));
+            }
+        });
+        
+        // DataZoom event handler to sync or notify
+        chart.on('dataZoom', function (params) {
+             // Optional: notify android
+        });
+
+        // Set theme based on system (passed from Android ideally, or detected)
+        function setTheme(isDark) {
+            // ECharts doesn't dynamic switch easily without dispose, 
+            // but we can update options with dark colors.
+            // Or dispose and re-init.
+            // For now, assume options handle colors.
+        }
+    </script>
+</body>
+</html>

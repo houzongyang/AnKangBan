@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/bg_rounded_top_16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="定制睡前仪式"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="选择适合你的睡前准备步骤，我们将引导你完成。"
+        android:textColor="#757575"
+        android:layout_marginBottom="24dp"/>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkBath"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="热水澡 (15分钟)"
+        android:checked="true"/>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkReading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="阅读纸质书 (20分钟)"/>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkMeditation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="冥想/呼吸练习 (10分钟)"
+        android:checked="true"/>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkMusic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="聆听助眠白噪音 (30分钟)"/>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkStretch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="轻度拉伸 (5分钟)"/>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="远离手机 (睡前30分钟)"
+        android:checked="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="环境调优"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="#333333"/>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkLight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="调暗灯光"/>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkTemp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="调节室温 (26°C)"/>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="开始仪式"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#673AB7"
+        android:padding="12dp"/>
+
+</LinearLayout>

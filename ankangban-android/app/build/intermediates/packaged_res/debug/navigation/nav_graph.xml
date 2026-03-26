@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/healthDashboardFragment">
+
+    <fragment
+        android:id="@+id/healthDashboardFragment"
+        android:name="com.ankangban.health.features.dashboard.DashboardFragment"
+        android:label="@string/tab_title_dashboard">
+        <action
+            android:id="@+id/action_dashboard_to_trends"
+            app:destination="@id/healthTrendsFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_source"
+            app:destination="@id/sourceManagementFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_chronic"
+            app:destination="@id/chronicFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_warning_config"
+            app:destination="@id/warningConfigFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_sleep"
+            app:destination="@id/sleepFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_medication"
+            app:destination="@id/medicationListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/medicationListFragment"
+        android:name="com.ankangban.health.features.medication.MedicationListFragment"
+        android:label="@string/title_medication_reminder">
+        <action
+            android:id="@+id/action_list_to_edit"
+            app:destination="@id/medicationEditFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/medicationEditFragment"
+        android:name="com.ankangban.health.features.medication.MedicationEditFragment"
+        android:label="添加用药">
+        <argument
+            android:name="medicationId"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <action
+            android:id="@+id/action_edit_to_consult"
+            app:destination="@id/consultFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/healthTrendsFragment"
+        android:name="com.ankangban.health.features.trends.HealthTrendsFragment"
+        android:label="数据趋势" />
+
+    <fragment
+        android:id="@+id/sourceManagementFragment"
+        android:name="com.ankangban.health.features.source.SourceManagementFragment"
+        android:label="数据源管理" />
+
+    <fragment
+        android:id="@+id/chronicFragment"
+        android:name="com.ankangban.health.features.chronic.ChronicFragment"
+        android:label="@string/tab_title_chronic">
+        <action
+            android:id="@+id/action_chronic_to_medication"
+            app:destination="@id/medicationListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sleepFragment"
+        android:name="com.ankangban.health.features.sleep.SleepImprovementFragment"
+        android:label="@string/tab_title_sleep">
+        <action
+            android:id="@+id/action_sleep_to_tools"
+            app:destination="@id/sleepToolsFragment" />
+        <action
+            android:id="@+id/action_sleep_to_calendar"
+            app:destination="@id/sleepCalendarFragment" />
+        <action
+            android:id="@+id/action_sleep_to_trends"
+            app:destination="@id/healthTrendsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sleepToolsFragment"
+        android:name="com.ankangban.health.features.sleep.tools.SleepToolsFragment"
+        android:label="助眠工具箱" />
+
+    <fragment
+        android:id="@+id/sleepCalendarFragment"
+        android:name="com.ankangban.health.features.sleep.calendar.SleepCalendarFragment"
+        android:label="睡眠打卡日历" />
+
+    <fragment
+        android:id="@+id/consultFragment"
+        android:name="com.ankangban.health.features.consultation.ConsultationFragment"
+        android:label="@string/tab_title_consult" />
+
+    <fragment
+        android:id="@+id/familyFragment"
+        android:name="com.ankangban.health.features.family.FamilyFragment"
+        android:label="@string/tab_title_family" />
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.ankangban.health.features.auth.LoginFragment"
+        android:label="登录" >
+        <action
+            android:id="@+id/action_loginFragment_to_healthDashboardFragment"
+            app:destination="@id/healthDashboardFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/warningConfigFragment"
+        android:name="com.ankangban.health.features.dashboard.WarningConfigFragment"
+        android:label="预警规则配置" />
+
+    <fragment
+        android:id="@+id/personalCenterFragment"
+        android:name="com.ankangban.health.features.profile.PersonalCenterFragment"
+        android:label="个人中心">
+        <action
+            android:id="@+id/action_profile_to_edit"
+            app:destination="@id/personalInfoEditFragment" />
+        <action
+            android:id="@+id/action_profile_to_warning"
+            app:destination="@id/warningConfigFragment" />
+        <action
+            android:id="@+id/action_profile_to_data"
+            app:destination="@id/dataManagerFragment" />
+        <action
+            android:id="@+id/action_profile_to_privacy"
+            app:destination="@id/privacySettingsFragment" />
+        <action
+            android:id="@+id/action_profile_to_system"
+            app:destination="@id/systemSettingsFragment" />
+        <action
+            android:id="@+id/action_profile_to_help"
+            app:destination="@id/helpFeedbackFragment" />
+        <action
+            android:id="@+id/action_profile_to_login"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/personalInfoEditFragment"
+        android:name="com.ankangban.health.features.profile.PersonalInfoEditFragment"
+        android:label="个人信息编辑" />
+
+    <fragment
+        android:id="@+id/dataManagerFragment"
+        android:name="com.ankangban.health.features.profile.DataManagerFragment"
+        android:label="数据管理" />
+
+    <fragment
+        android:id="@+id/privacySettingsFragment"
+        android:name="com.ankangban.health.features.profile.PrivacySettingsFragment"
+        android:label="隐私设置" />
+
+    <fragment
+        android:id="@+id/systemSettingsFragment"
+        android:name="com.ankangban.health.features.profile.SystemSettingsFragment"
+        android:label="系统设置" />
+
+    <fragment
+        android:id="@+id/helpFeedbackFragment"
+        android:name="com.ankangban.health.features.profile.HelpFeedbackFragment"
+        android:label="帮助与反馈" />
+
+</navigation>
+

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <title>ECharts 心率折线图</title>
+  <script src="echarts.min.js"></script>
+  <style>
+    html, body, #chart { height: 100%; margin: 0; background-color: #f5f5f5; }
+    #debug { position: absolute; top: 10px; left: 10px; z-index: 100; color: red; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div id="debug"></div>
+  <div id="chart"></div>
+  <script>
+    window.onerror = function(msg, url, line) {
+       document.getElementById('debug').innerHTML += 'Error: ' + msg + '<br>';
+    };
+
+    // Android 端通过 evaluateJavascript 调用 window.renderChart(payloadJson)
+    window.renderChart = function(input) {
+      try {
+        document.getElementById('debug').innerHTML = 'Rendering...';
+        
+        if (typeof echarts === 'undefined') {
+            throw new Error('ECharts library not loaded');
+        }
+
+        var payload = input;
+        if (typeof input === 'string') {
+            try {
+                payload = JSON.parse(input);
+            } catch (e) {
+                // If parse fails, maybe it's already an object but typeof returned string? Unlikely.
+                // Or input is not valid JSON.
+                console.warn("JSON parse failed, assuming input is object or invalid", e);
+            }
+        }
+        
+        if (!payload || typeof payload !== 'object') {
+             throw new Error('Invalid payload: ' + JSON.stringify(payload));
+        }
+
+        var xs = payload.x || [];
+        var ys = payload.y || [];
+        var title = payload.title || '心率';
+        var dt = xs.map(function(ts) {
+          var d = new Date(ts);
+          return [d.getHours(), d.getMinutes()].map(function(n){return ('0'+n).slice(-2)}).join(':');
+        });
+        var el = document.getElementById('chart');
+        if (!el) throw new Error('Chart element not found');
+        
+        var chart = echarts.init(el);
+        var opt = {
+          title: { text: title },
+          tooltip: { trigger: 'axis' },
+          xAxis: { type: 'category', data: dt },
+          yAxis: { type: 'value', name: 'bpm' },
+          grid: { left: 40, right: 20, top: 40, bottom: 40 },
+          series: [
+            { type: 'line', name: '心率', data: ys, smooth: true }
+          ]
+        };
+        chart.setOption(opt);
+        document.getElementById('debug').innerHTML += ' Done.';
+      } catch (e) {
+        document.getElementById('debug').innerHTML = 'Error: ' + e.message;
+        console.error(e);
+      }
+    };
+  </script>
+</body>
+</html>
+

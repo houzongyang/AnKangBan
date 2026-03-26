@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/healthDashboardFragment"
+        android:icon="@android:drawable/ic_menu_today"
+        android:title="@string/tab_title_dashboard" />
+
+    <item
+        android:id="@+id/chronicFragment"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="@string/tab_title_chronic" />
+
+    <item
+        android:id="@+id/sleepFragment"
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:title="@string/tab_title_sleep" />
+
+    <item
+        android:id="@+id/consultFragment"
+        android:icon="@android:drawable/ic_menu_help"
+        android:title="@string/tab_title_consult" />
+
+    <item
+        android:id="@+id/personalCenterFragment"
+        android:icon="@drawable/ic_person"
+        android:title="@string/tab_title_personal" />
+
+</menu>
+

@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F5F5F5"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_back"
+                    app:tint="#333333" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/btnBack"
+                    android:layout_marginStart="16dp"
+                    android:text="睡眠改善中心"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#333333" />
+
+                <TextView
+                    android:id="@+id/tvPoints"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@id/switchMonitoring"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="12dp"
+                    android:text="🏆 0"
+                    android:textColor="#FF9800"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:background="@drawable/bg_points_badge"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"/>
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switchMonitoring"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@id/spinnerPeriod"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
+                    android:checked="true"
+                    app:showText="false"
+                    android:textOn=""
+                    android:textOff=""
+                    android:text=""/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/spinnerPeriod"
+                    style="@style/Widget.Material3.Button.TextButton.Icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="8dp"
+                    android:text="昨日"
+                    android:textSize="18sp"
+                    android:textColor="#673AB7"
+                    app:icon="@drawable/ic_arrow_drop_down"
+                    app:iconTint="#673AB7"
+                    app:iconGravity="end" />
+
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#EEEEEE"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 1. Core Sleep Data -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardCoreData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="20dp"
+                    android:gravity="center_vertical">
+
+                    <!-- Ring Chart -->
+                    <FrameLayout
+                        android:layout_width="100dp"
+                        android:layout_height="100dp">
+                        
+                        <com.google.android.material.progressindicator.CircularProgressIndicator
+                            android:id="@+id/progressDeepSleep"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            app:indicatorSize="100dp"
+                            app:trackThickness="8dp"
+                            app:trackColor="#E1BEE7"
+                            app:indicatorColor="#673AB7"
+                            android:progress="28"/>
+                            
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+                            <TextView
+                                android:id="@+id/tvDeepSleepPercent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="28%"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:textColor="#673AB7"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="深睡占比"
+                                android:textSize="10sp"
+                                android:textColor="#757575"/>
+                        </LinearLayout>
+                    </FrameLayout>
+                    
+                    <Space
+                        android:layout_width="16dp"
+                        android:layout_height="wrap_content"/>
+
+                    <!-- Grid Metrics -->
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:columnCount="2"
+                        android:rowCount="3">
+
+                        <!-- Item 1 -->
+                        <TextView
+                            android:id="@+id/tvDuration"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1"
+                            android:text="时长: 7.2h"
+                            android:textSize="12sp"
+                            android:textColor="#333333"
+                            android:drawablePadding="4dp"
+                            android:layout_marginBottom="8dp"/>
+
+                        <!-- Item 2 -->
+                        <TextView
+                            android:id="@+id/tvEfficiency"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1"
+                            android:text="效率: 85%"
+                            android:textSize="12sp"
+                            android:textColor="#333333"
+                            android:layout_marginBottom="8dp"/>
+
+                        <!-- Item 3 -->
+                        <TextView
+                            android:id="@+id/tvLatency"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1"
+                            android:text="入睡: 25min"
+                            android:textSize="12sp"
+                            android:textColor="#333333"
+                            android:layout_marginBottom="8dp"/>
+
+                        <!-- Item 4 -->
+                        <TextView
+                            android:id="@+id/tvAwake"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1"
+                            android:text="觉醒: 2次"
+                            android:textSize="12sp"
+                            android:textColor="#333333"
+                            android:layout_marginBottom="8dp"/>
+
+                        <!-- Item 5 -->
+                        <TextView
+                            android:id="@+id/tvLightSleep"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1"
+                            android:text="浅睡: 72%"
+                            android:textSize="12sp"
+                            android:textColor="#333333"/>
+
+                        <!-- Item 6 -->
+                        <TextView
+                            android:id="@+id/tvHeartRate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1"
+                            android:text="心率: 65bpm"
+                            android:textSize="12sp"
+                            android:textColor="#333333"/>
+                    </GridLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 2. Quality Rating -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardQuality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        
+                        <ImageView
+                            android:id="@+id/ivQualityIcon"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_check_circle"
+                            app:tint="#4CAF50"/>
+                            
+                        <TextView
+                            android:id="@+id/tvQualityLevel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="睡眠质量：良好"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#333333"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvQualityReason"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="深睡占比28%，但昨日步数不足5000步，可能影响深睡时长。"
+                        android:textSize="14sp"
+                        android:textColor="#616161"/>
+
+                    <TextView
+                        android:id="@+id/tvQualityImprovement"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="建议：提升深睡占比至30%+，可优化睡眠质量至优质"
+                        android:textSize="12sp"
+                        android:textColor="#F44336"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 3. Immediate Plan (AI Powered) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardImmediatePlan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="#F3E5F5"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="AI 睡前1小时助眠方案"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#4A148C"/>
+                            
+                        <TextView
+                            android:id="@+id/tvAiTag"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="混元大模型生成"
+                            android:textSize="10sp"
+                            android:textColor="#FFFFFF"
+                            android:background="#7B1FA2"
+                            android:paddingHorizontal="6dp"
+                            android:paddingVertical="2dp"
+                            android:layout_marginEnd="8dp"/>
+
+                        <ImageButton
+                            android:id="@+id/btnRegenerateAi"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_refresh"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="重新生成"
+                            app:tint="#7B1FA2"
+                            android:layout_marginEnd="8dp"/>
+
+                        <ProgressBar
+                            android:id="@+id/pbAiLoading"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:indeterminateTint="#7B1FA2"
+                            android:visibility="gone"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvImmediateReason"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="正在生成个性化方案..."
+                        android:textSize="12sp"
+                        android:textColor="#7B1FA2"
+                        android:textStyle="italic"/>
+                        
+                    <TextView
+                        android:id="@+id/tvImmediateCorePoint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text=""
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="#4A148C"/>
+
+                    <LinearLayout
+                        android:id="@+id/llPlanStepsContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="12dp">
+                        <!-- Steps will be added dynamically -->
+                    </LinearLayout>
+                    
+                    <TextView
+                        android:id="@+id/tvDisclaimer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="*本方案由AI生成，仅供参考，不作为医疗建议。数据仅用于生成助眠方案，不存储于第三方服务器。"
+                        android:textSize="10sp"
+                        android:textColor="#9E9E9E"
+                        android:gravity="center_horizontal"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 4. 7-Day Plan -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card7DayPlan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="7天深睡提升计划"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#333333"/>
+                            
+                        <TextView
+                            android:id="@+id/tvPlanProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="进度 2/7"
+                            android:textSize="14sp"
+                            android:textColor="#673AB7"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+                    
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/progress7Day"
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:layout_marginTop="8dp"
+                        android:progress="28"
+                        app:trackCornerRadius="2dp"
+                        app:trackColor="#E1BEE7"
+                        app:indicatorColor="#673AB7"/>
+
+                    <TextView
+                        android:id="@+id/tvDailyPlanTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Day 2: 睡眠调理"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="#333333"/>
+
+                    <TextView
+                        android:id="@+id/tvDailyPlanContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="固定23:00入睡，晨起7:00起床，白天运动30分钟"
+                        android:textSize="13sp"
+                        android:textColor="#616161"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDailyCheckIn"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="8dp"
+                        android:text="今日打卡"
+                        android:textSize="12sp"
+                        android:backgroundTint="#E8F5E9"
+                        android:textColor="#2E7D32"
+                        app:icon="@drawable/ic_check"
+                        app:iconTint="#2E7D32"
+                        app:iconSize="16dp"
+                        android:paddingTop="0dp"
+                        android:paddingBottom="0dp"/>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 5. Bottom Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="24dp"
+                android:weightSum="3">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnTrends"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="4dp"
+                    android:text="睡眠趋势"
+                    android:textSize="12sp"
+                    android:textColor="#333333"
+                    app:icon="@drawable/ic_trending_up"
+                    app:iconTint="#333333"
+                    app:iconGravity="textStart"
+                    android:backgroundTint="#EEEEEE"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnTools"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="助眠工具"
+                    android:textSize="12sp"
+                    android:textColor="#673AB7"
+                    app:icon="@drawable/ic_music_note"
+                    app:iconTint="#673AB7"
+                    app:iconGravity="textStart"
+                    android:backgroundTint="#EDE7F6"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCalendar"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:text="睡眠打卡"
+                    android:textSize="12sp"
+                    android:textColor="#333333"
+                    app:icon="@drawable/ic_calendar_today"
+                    app:iconTint="#333333"
+                    app:iconGravity="textStart"
+                    android:backgroundTint="#EEEEEE"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="本页面睡眠分析与方案仅为健康参考，不替代专业医疗指导"
+                android:gravity="center"
+                android:textSize="11sp"
+                android:textColor="#BDBDBD"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Loading Overlay -->
+    <FrameLayout
+        android:id="@+id/loadingOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80FFFFFF"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
